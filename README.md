@@ -1,4 +1,4 @@
-# react-hooks-router-ts
+# react-router-ts
 
 [![License](https://img.shields.io/badge/License-zlib/libpng-blue.svg)](https://github.com/Lusito/typed-undo/blob/master/LICENSE)
 
@@ -10,11 +10,11 @@ This project only has one peer dependency: React 16.8.6 or higher.
 
 #### Yet another router, seriously?
 
-Yep. I'm hooked on reacts new hooks feature and wanted to try it in a new librar. I saw a couple of hooks based routers, but aside from the fact, that they didn't have (maintained) types for TypeScript, they had other shortcomings.
+Yep. I'm hooked on reacts new hooks feature and wanted to try it in a new library. I saw a couple of hooks based routers, but aside from the fact, that they didn't have (maintained) types for TypeScript, they had other shortcomings.
 
 ### Installation via NPM
 
-```npm i react-hooks-router-ts```
+```npm i react-router-ts```
 
 ### Examples
 
@@ -23,7 +23,7 @@ Since this library doesn't force a route matching algorithm on you, you'll have 
 
 ```TypeScript
 import pathToRegexp from "path-to-regexp";
-import { RouteParams } from "react-hooks-router-ts";
+import { RouteParams } from "react-router-ts";
 
 function routeMatcherFactory(pattern: string) {
     const keys: pathToRegexp.Key[] = [];
@@ -58,7 +58,7 @@ function routeMatcherFactory(pattern: string) {
 You'll need to add a `Router` component in your app (just one). Any other components and hooks from this library need to be children of this `Router` (doesn't matter how deeply nested).
 
 ```tsx
-import { Router } from "react-hooks-router-ts";
+import { Router } from "react-router-ts";
 export const App = () => (
     <Router routeMatcherFactory={routeMatcherFactory}>
         ....
@@ -101,7 +101,7 @@ If your app is not located at the root directory of a server, but instead in a s
 Basename will be prefixed on `Link` components.
 
 ```tsx
-import { Router } from "react-hooks-router-ts";
+import { Router } from "react-router-ts";
 export const App = () => (
     <Router basename="/my-app" routeMatcherFactory={routeMatcherFactory}>
         ....
@@ -112,7 +112,7 @@ export const App = () => (
 If you have a `<base>` tag in your HTML, this can be easily detected using the `getBasename()` helper. That way you don't have to hard-code it:
 
 ```tsx
-import { Router, getBasename } from "react-hooks-router-ts";
+import { Router, getBasename } from "react-router-ts";
 export const App = () => (
     <Router basename={getBasename()} routeMatcherFactory={routeMatcherFactory}>
         ....
@@ -142,7 +142,7 @@ export function Link(props: React.PropsWithChildren<LinkProps>) {
 
 Creating a `LinkButton` is as simple as this:
 ```tsx
-import { useRouteLink } from "react-hooks-router-ts";
+import { useRouteLink } from "react-router-ts";
 ...
 export function LinkButton(props: React.PropsWithChildren<LinkButtonProps>) {
     const routeLink = useRouteLink(props.href, props.onClick);
@@ -156,7 +156,7 @@ export function LinkButton(props: React.PropsWithChildren<LinkButtonProps>) {
 
 ```tsx
 import { useContext } from "react";
-import { RouterContext } from "react-hooks-router-ts";
+import { RouterContext } from "react-router-ts";
 ...
 export function Component() {
     // router is of type RouterContextValue (see below)
@@ -185,7 +185,7 @@ export type CachedRouteMatcher = (pattern: string, path: string) => (RouteParams
 
 ### Report isssues
 
-Something not working quite as expected? Do you need a feature that has not been implemented yet? Check the [issue tracker](https://github.com/Lusito/react-hooks-router-ts/issues) and add a new one if your problem is not already listed. Please try to provide a detailed description of your problem, including the steps to reproduce it.
+Something not working quite as expected? Do you need a feature that has not been implemented yet? Check the [issue tracker](https://github.com/Lusito/react-router-ts/issues) and add a new one if your problem is not already listed. Please try to provide a detailed description of your problem, including the steps to reproduce it.
 
 ### Contribute
 
@@ -193,5 +193,5 @@ Awesome! If you would like to contribute with a new feature or submit a bugfix, 
 
 ### License
 
-react-hooks-router-ts has been released under the [zlib/libpng](https://github.com/Lusito/typed-undo/blob/master/LICENSE) license, meaning you
+react-router-ts has been released under the [zlib/libpng](https://github.com/Lusito/typed-undo/blob/master/LICENSE) license, meaning you
 can use it free of charge, without strings attached in commercial and non-commercial projects. Credits are appreciated but not mandatory.
