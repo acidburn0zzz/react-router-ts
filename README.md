@@ -21,7 +21,7 @@ Yep. I'm hooked on reacts new hooks feature and wanted to try it in a new librar
 #### Route Matching
 Since this library doesn't force a route matching algorithm on you, you'll have to supply a factory. Here is a simple example using the popular [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) library:
 
-```TypeScript
+```tsx
 import pathToRegexp from "path-to-regexp";
 import { RouteParams } from "react-router-ts";
 
@@ -48,7 +48,7 @@ I.e. if the path is "/users/Zaphod", then the param with the key "name" would ha
 If you don't need dynamic shit like that, you can implement the routeMatcherFactory as simple as this:
 
 
-```TypeScript
+```tsx
 function routeMatcherFactory(pattern: string) {
     return (path: string) => ((path === pattern) ? {} : null);
 }
