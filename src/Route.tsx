@@ -11,6 +11,7 @@ export interface RouteProps {
     children?: ((params: RouteParams) => React.ReactNode) | React.ReactNode;
     path: string;
     component?: React.ComponentType<RouteComponentProps>;
+    addKey?: boolean;
 }
 
 export function Route(props: RouteProps) {
@@ -22,7 +23,7 @@ export function Route(props: RouteProps) {
 
     const Component = props.component;
     if (Component)
-        return <Component params={params} />;
+        return <Component params={params} key={props.addKey ? router.path : undefined} />;
 
     return typeof props.children === "function" ? props.children(params) : props.children;
 }

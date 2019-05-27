@@ -82,6 +82,18 @@ export const Component = () => (
 
 **Beware:** If multiple routes have a matching path, all will be shown. Use a `Switch` if that's not desired.
 
+#### Fresh Rendering
+
+Let's say you have this route:
+
+```tsx
+export const Component = () => <Route path="/news/:id" component={News} />;
+```
+
+Moving from `/news/1` to `/news/2` will only update the components properties. State will be preserved.
+If you want to force the component to be created from scratch in this situation, you can do so by setting the property `addKey` (boolean).
+This will add the `key` property to the component with a value of the current path.
+
 ### Switch
 If you only want the first `Route` that has a matching path to be shown, you can use a `Switch`:
 
