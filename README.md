@@ -82,6 +82,42 @@ export const Component = () => (
 
 **Beware:** If multiple routes have a matching path, all will be shown. Use a `Switch` if that's not desired.
 
+#### Adding parameters
+
+Let's say you have this route:
+
+```tsx
+export const Component = () => (
+    <Route path="/news/:id" component={News} />
+);
+```
+
+You defined a parameter :id in your path. Now you want to access it in your `News` component:
+
+```tsx
+export const News = (props: RouteComponentProps<{ id: string }>) => (
+    <div>News ID: {props.params.id}</div>
+);
+```
+
+#### Rendering children
+
+You can render children manually instead of using a Component class like this:
+```tsx
+export const Component = () => (
+    <Route path="/foo">Bar</Route>;
+);
+```
+
+#### Using a callback
+
+You can even use a callback instead of children like this:
+```tsx
+export const Component = () => (
+    <Route path="/foo">{(params: { id: string }) => <div>Bar {params.id}</div>}</Route>;
+);
+```
+
 #### Fresh Rendering
 
 Let's say you have this route:
@@ -164,15 +200,14 @@ export function LinkButton(props: React.PropsWithChildren<LinkButtonProps>) {
 
 #### RouterContext
 
-`Router` internally adds a RouterContext, which you can access using `useContext(RouterContext)`:
+`Router` internally adds a RouterContext to your application, which you can access using `useRouter()`:
 
 ```tsx
-import { useContext } from "react";
-import { RouterContext } from "react-router-ts";
+import { useRouter } from "react-router-ts";
 ...
 export function Component() {
     // router is of type RouterContextValue (see below)
-    const router = useContext(RouterContext);
+    const router = useRouter();
     ....
 }
 ```
