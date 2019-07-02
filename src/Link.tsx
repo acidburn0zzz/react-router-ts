@@ -1,13 +1,13 @@
-import React, { useCallback, useContext } from 'react';
-import { RouterContext } from './RouterContext';
+import React, { useCallback } from 'react';
+import { useRouter } from './hooks';
 
 export function useRouteLink(href: string, onClick?: React.EventHandler<React.MouseEvent<HTMLElement>>) {
-    const { history, basename } = useContext(RouterContext);
+    const { history, basename } = useRouter();
 
     const onClickWrapped = useCallback((e: React.MouseEvent<HTMLElement>) => {
         try {
             onClick && onClick(e);
-        } catch(e) {
+        } catch (e) {
             console.error(e);
         }
         if (!e.defaultPrevented) {

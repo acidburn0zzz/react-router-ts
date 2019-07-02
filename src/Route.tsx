@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { RouterContext } from './RouterContext';
+import React, { useMemo } from 'react';
+import { useRouter } from './hooks';
 
 export type RouteParams = { [s: string]: string };
 
@@ -15,8 +15,8 @@ export interface RouteProps {
 }
 
 export function Route(props: RouteProps) {
-    const router = useContext(RouterContext);
-    const params = router.matchRoute(props.path, router.path);
+    const router = useRouter();
+    const params = useMemo(() => router.matchRoute(props.path, router.path), [props.path, router.path]);
 
     if (!params)
         return null;

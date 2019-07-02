@@ -1,13 +1,13 @@
-import React, { isValidElement, useContext } from 'react';
+import React, { isValidElement } from 'react';
 import { RouteProps } from './Route';
-import { RouterContext } from './RouterContext';
+import { useRouter } from './hooks';
 
 export interface SwitchProps {
     children: React.ReactElement<RouteProps>[];
 }
 
 export function Switch(props: SwitchProps) {
-    const { matchRoute, path } = useContext(RouterContext);
+    const { matchRoute, path } = useRouter();
 
     return props.children.find((child) => child && isValidElement(child) && !!matchRoute(child.props.path, path)) || null;
 }
