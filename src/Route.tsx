@@ -3,7 +3,7 @@ import { useRouter } from './hooks';
 
 export type RouteParams = { [s: string]: string };
 
-export interface RouteComponentProps<T=RouteParams> {
+export interface RouteComponentProps<T extends RouteParams = RouteParams> {
     params: T;
 }
 

@@ -67,7 +67,7 @@ export const App = () => (
 ```
 
 
-### Route
+#### Route
 
 Showing a component if the location matches a certain path is done with a `Route` component. It takes a `path` prop and either a `component` prop or children.
 
@@ -118,6 +118,19 @@ export const Component = () => (
 );
 ```
 
+
+#### Get parameters without being in a Route Component
+
+You can get a memoized parameters object for the given path like this:
+
+```tsx
+export const Component = () => {
+    const params = useParams<{ id: string }>("/news/:id");
+    //...
+};
+```
+
+
 #### Fresh Rendering
 
 Let's say you have this route:
@@ -130,7 +143,7 @@ Moving from `/news/1` to `/news/2` will only update the components properties. S
 If you want to force the component to be created from scratch in this situation, you can do so by setting the property `addKey` (boolean).
 This will add the `key` property to the component with a value of the current path.
 
-### Switch
+#### Switch
 If you only want the first `Route` that has a matching path to be shown, you can use a `Switch`:
 
 ```tsx
