@@ -1,20 +1,27 @@
 # react-router-ts
 
-[![License](https://img.shields.io/badge/License-zlib/libpng-blue.svg)](https://github.com/Lusito/typed-undo/blob/master/LICENSE)
+[![Minified + gzipped size](https://badgen.net/bundlephobia/minzip/react-router-ts)](https://www.npmjs.com/package/react-router-ts)
+[![NPM version](https://badgen.net/npm/v/react-router-ts)](https://www.npmjs.com/package/react-router-ts)
+[![License](https://badgen.net/github/license/lusito/react-router-ts)](https://github.com/lusito/react-router-ts/blob/master/LICENSE)
+[![Stars](https://badgen.net/github/stars/lusito/react-router-ts)](https://github.com/lusito/react-router-ts)
+[![Watchers](https://badgen.net/github/watchers/lusito/react-router-ts)](https://github.com/lusito/react-router-ts)
 
 A simple, lightweight react router using hooks, written in TypeScript.
 
-This project only has one peer dependency: React 16.8.6 or higher.
+#### Why use this router?
 
-**Beware:** This library is shipped as es2015 modules. To use them in browsers, you'll have to transpile them using webpack or similar, which you probably already do.
-
-#### Yet another router, seriously?
-
-Yep. I'm hooked on reacts new hooks feature and wanted to try it in a new library. I saw a couple of hooks based routers, but aside from the fact, that they didn't have (maintained) types for TypeScript, they had other shortcomings.
+- Very lightweight (see the badges above for the latest size).
+- Flexible and dead simple to use.
+- Uses the browsers history API.
+- Written with [hooks](https://reactjs.org/docs/hooks-intro.html) in TypeScript
+- Only has one peer dependency: React 16.8.6 or higher.
+- Liberal license: [zlib/libpng](https://github.com/Lusito/react-router-ts/blob/master/LICENSE)
 
 ### Installation via NPM
 
 ```npm i react-router-ts```
+
+This library is shipped as es2015 modules. To use them in browsers, you'll have to transpile them using webpack or similar, which you probably already do.
 
 ### Examples
 
@@ -253,5 +260,5 @@ Awesome! If you would like to contribute with a new feature or submit a bugfix, 
 
 ### License
 
-react-router-ts has been released under the [zlib/libpng](https://github.com/Lusito/typed-undo/blob/master/LICENSE) license, meaning you
+react-router-ts has been released under the [zlib/libpng](https://github.com/Lusito/react-router-ts/blob/master/LICENSE) license, meaning you
 can use it free of charge, without strings attached in commercial and non-commercial projects. Credits are appreciated but not mandatory.
