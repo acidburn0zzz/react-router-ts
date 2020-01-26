@@ -14,7 +14,7 @@ A simple, lightweight react router using hooks, written in TypeScript.
 - Flexible and dead simple to use.
 - Uses the browsers history API.
 - Written with [hooks](https://reactjs.org/docs/hooks-intro.html) in TypeScript
-- Only has one peer dependency: React 16.8.6 or higher.
+- Only has one peer dependency: React 16.12.0 or higher.
 - Liberal license: [zlib/libpng](https://github.com/Lusito/react-router-ts/blob/master/LICENSE)
 
 ### Installation via NPM
