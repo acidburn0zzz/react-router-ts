@@ -13,6 +13,7 @@ A simple, lightweight react router using hooks, written in TypeScript.
 - Very lightweight (see the badges above for the latest size).
 - Flexible and dead simple to use.
 - Uses the browsers history API.
+- Does not force a matching algorithm on you, but comes with a simple one built-in.
 - Written with [hooks](https://reactjs.org/docs/hooks-intro.html) in TypeScript
 - Only has one peer dependency: React 16.12.0 or higher.
 - Liberal license: [zlib/libpng](https://github.com/Lusito/react-router-ts/blob/master/LICENSE)
@@ -25,54 +26,17 @@ This library is shipped as es2015 modules. To use them in browsers, you'll have 
 
 ### Examples
 
-#### Route Matching
-Since this library doesn't force a route matching algorithm on you, you'll have to supply a factory. Here is a simple example using the popular [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) library:
-
-```tsx
-import pathToRegexp from "path-to-regexp";
-import { RouteParams } from "react-router-ts";
-
-function routeMatcherFactory(pattern: string) {
-    const keys: pathToRegexp.Key[] = [];
-    const regex = pathToRegexp(pattern, keys);
-
-    return (path: string) => {
-        const out = regex.exec(path);
-
-        if (!out) return null;
-
-        return keys.reduce((params, key, i) => {
-            params[key.name] = out[i + 1];
-            return params;
-        }, {} as RouteParams);
-    }
-}
-```
-
-Using pathToRegexp allows to extract named parameters from a path like "/users/:name".
-I.e. if the path is "/users/Zaphod", then the param with the key "name" would have the value "Zaphod".
-
-If you don't need dynamic shit like that, you can implement the routeMatcherFactory as simple as this:
-
-
-```tsx
-function routeMatcherFactory(pattern: string) {
-    return (path: string) => ((path === pattern) ? {} : null);
-}
-```
-
 #### Router
 You'll need to add a `Router` component in your app (just one). Any other components and hooks from this library need to be children of this `Router` (doesn't matter how deeply nested).
 
 ```tsx
 import { Router } from "react-router-ts";
 export const App = () => (
-    <Router routeMatcherFactory={routeMatcherFactory}>
+    <Router>
         ....
     </Router>
 );
 ```
-
 
 #### Route
 
@@ -89,9 +53,84 @@ export const Component = () => (
 
 **Beware:** If multiple routes have a matching path, all will be shown. Use a `Switch` if that's not desired.
 
+As you can see, it's possible to specify a component to render or normal children.
+
+You can even use a callback instead of children like this:
+```tsx
+export const Component = () => (
+    <Route path="/foo">{(params: { id: string }) => <div>Bar {params.id}</div>}</Route>;
+);
+```
+
+See further below for the the possibility of using parameters.
+
+#### Switch
+If you only want the first `Route` that has a matching path to be shown, you can use a `Switch`:
+
+```tsx
+export const Component = () => (
+    <Switch>
+        <Route path="/news" component={News} />
+        <Route path="/fakenews" component={FakeNews} />
+        <Route path="*" component={Otherwise} />
+    </Switch>
+);
+```
+
+**Note:** if you are not using the default matching algorithm, you might need a different path for the else branch.
+
+
+#### Get parameters without being in a Route Component
+
+You can get a memoized parameters object for the given path like this:
+
+```tsx
+export const Component = () => {
+    const params = useParams<{ id: string }>("/news/:id");
+    //...
+};
+```
+
+#### Custom Route Matching
+This library doesn't force a route matching algorithm on you, but it comes with a lightweight one built-in.
+
+The default route matching algorithm only allows exact matches and a match everything ("*").
+
+If you need something more sophisticated, you'll have to supply a factory. Here is a simple example using the popular [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) library:
+
+```tsx
+import { pathToRegexp, Key } from "path-to-regexp";
+import { Router, RouteParams } from "react-router-ts";
+
+function routeMatcherFactory(pattern: string) {
+    const keys: Key[] = [];
+    const regex = pathToRegexp(pattern, keys);
+
+    return (path: string) => {
+        const out = regex.exec(path);
+
+        if (!out) return null;
+
+        return keys.reduce((params, key, i) => {
+            params[key.name] = out[i + 1];
+            return params;
+        }, {} as RouteParams);
+    }
+}
+
+export const App = () => (
+    <Router routeMatcherFactory={routeMatcherFactory}>
+        ....
+    </Router>
+);
+```
+
+Using pathToRegexp allows to extract named parameters from a pattern like "/users/:name".
+I.e. if the path is "/users/Zaphod", then the param with the key "name" would have the value "Zaphod".
+
 #### Adding parameters
 
-Let's say you have this route:
+When you use a custom matching algorithm like the one above, you can extract values from the path. Let's say you have this route:
 
 ```tsx
 export const Component = () => (
@@ -107,37 +146,6 @@ export const News = (props: RouteComponentProps<{ id: string }>) => (
 );
 ```
 
-#### Rendering children
-
-You can render children manually instead of using a Component class like this:
-```tsx
-export const Component = () => (
-    <Route path="/foo">Bar</Route>;
-);
-```
-
-#### Using a callback
-
-You can even use a callback instead of children like this:
-```tsx
-export const Component = () => (
-    <Route path="/foo">{(params: { id: string }) => <div>Bar {params.id}</div>}</Route>;
-);
-```
-
-
-#### Get parameters without being in a Route Component
-
-You can get a memoized parameters object for the given path like this:
-
-```tsx
-export const Component = () => {
-    const params = useParams<{ id: string }>("/news/:id");
-    //...
-};
-```
-
-
 #### Fresh Rendering
 
 Let's say you have this route:
@@ -150,19 +158,6 @@ Moving from `/news/1` to `/news/2` will only update the components properties. S
 If you want to force the component to be created from scratch in this situation, you can do so by setting the property `addKey` (boolean).
 This will add the `key` property to the component with a value of the current path.
 
-#### Switch
-If you only want the first `Route` that has a matching path to be shown, you can use a `Switch`:
-
-```tsx
-export const Component = () => (
-    <Switch>
-        <Route path="/news" component={News} />
-        <Route path="/fakenews" component={FakeNews} />
-        <Route path="/:fallback*" component={Otherwise} />
-    </Switch>
-);
-```
-
 #### Using a basename
 If your app is not located at the root directory of a server, but instead in a sub-directory, you'll want to specify that sub-directory. You can do that on the `Router` component.
 
@@ -171,7 +166,7 @@ Basename will be prefixed on `Link` components.
 ```tsx
 import { Router } from "react-router-ts";
 export const App = () => (
-    <Router basename="/my-app" routeMatcherFactory={routeMatcherFactory}>
+    <Router basename="/my-app">
         ....
     </Router>
 );
@@ -220,7 +215,7 @@ export function LinkButton(props: React.PropsWithChildren<LinkButtonProps>) {
 
 #### RouterContext
 
-`Router` internally adds a RouterContext to your application, which you can access using `useRouter()`:
+`Router` internally adds a RouterContext to your application, which you can access using the `useRouter()` hook:
 
 ```tsx
 import { useRouter } from "react-router-ts";
