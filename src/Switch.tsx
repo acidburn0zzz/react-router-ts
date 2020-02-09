@@ -1,6 +1,6 @@
-import React, { isValidElement } from 'react';
-import { RouteProps } from './Route';
-import { useRouter } from './hooks';
+import React, { isValidElement } from "react";
+import { RouteProps } from "./Route";
+import { useRouter } from "./hooks";
 
 export interface SwitchProps {
     children: React.ReactElement<RouteProps>[];

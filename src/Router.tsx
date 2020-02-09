@@ -1,9 +1,9 @@
-import React, { useReducer, useEffect } from 'react';
-import { RouterContext, RouterContextValue } from './RouterContext';
-import { createHistory } from './history';
-import { createRouteMatcher, RouteMatcherFactory } from './routeMatcher';
-import { getPathWithoutBasename } from './basename';
-import { simpleRouteMatcherFactory } from './simpleRouteMatcherFactory';
+import React, { useReducer, useEffect } from "react";
+import { RouterContext, RouterContextValue } from "./RouterContext";
+import { createHistory } from "./history";
+import { createRouteMatcher, RouteMatcherFactory } from "./routeMatcher";
+import { getPathWithoutBasename } from "./basename";
+import { simpleRouteMatcherFactory } from "./simpleRouteMatcherFactory";
 
 export interface RouterProps {
     basename?: string;

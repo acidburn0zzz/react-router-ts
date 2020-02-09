@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { useRouter } from './hooks';
+import React, { useMemo } from "react";
+import { useRouter } from "./hooks";
 
 export type RouteParams = { [s: string]: string };
 

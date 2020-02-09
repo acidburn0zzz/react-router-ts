@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useRouter } from './hooks';
+import React, { useCallback } from "react";
+import { useRouter } from "./hooks";
 
 export function useRouteLink(href: string, onClick?: React.EventHandler<React.MouseEvent<HTMLElement>>) {
     const { history, basename } = useRouter();

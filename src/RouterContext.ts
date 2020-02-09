@@ -9,7 +9,7 @@ export interface RouterContextValue {
     matchRoute: CachedRouteMatcher;
 }
 
-const throwMissingDefault = () => { throw new Error('You forgot to add a Router element to your app.') };
+const throwMissingDefault = () => { throw new Error("You forgot to add a Router element to your app.") };
 
 export const RouterContext = createContext<RouterContextValue>({
     basename: "",
