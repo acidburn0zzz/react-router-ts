@@ -72,12 +72,12 @@ export const Component = () => (
     <Switch>
         <Route path="/news" component={News} />
         <Route path="/fakenews" component={FakeNews} />
-        <Route path="*" component={Otherwise} />
+        <Route path="*" /* use "(.*)" if you use path-to-regexp */ component={Otherwise} />
     </Switch>
 );
 ```
 
-**Note:** if you are not using the default matching algorithm, you might need a different path for the else branch.
+**Note:** The path pattern for the "Otherwise" Route differs depending on your route matching algorithm. With the built-in `simpleRouteMatcherFactory` you would use `"*"`, while you would use `"(.*)"` or `":fallback"`  for `path-to-regexp`.
 
 
 #### Get parameters without being in a Route Component
