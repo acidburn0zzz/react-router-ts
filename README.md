@@ -77,7 +77,7 @@ export const Component = () => (
 );
 ```
 
-**Note:** The path pattern for the "Otherwise" Route differs depending on your route matching algorithm. With the built-in `simpleRouteMatcherFactory` you would use `"*"`, while you would use `"(.*)"` or `":fallback"`  for `path-to-regexp`.
+**Note:** The path pattern for the "Otherwise" Route differs depending on your route matching algorithm. With the built-in `simpleRouteMatcherFactory` you would use `"*"`, while you would use `"(.*)"` or `"/:fallback"`  for `path-to-regexp`.
 
 
 #### Get parameters without being in a Route Component
