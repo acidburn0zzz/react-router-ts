@@ -1,6 +1,6 @@
 {
     "name": "react-router-ts",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "A lightweight react router using hooks, written in TypeScript",
     "keywords": [
         "TypeScript",
@@ -9,8 +9,6 @@
         "hooks",
         "react-hooks"
     ],
-    "author": "Santo Pfingsten",
-    "license": "MIT",
     "homepage": "https://github.com/Lusito/react-router-ts",
     "bugs": {
         "url": "https://github.com/Lusito/react-router-ts/issues"
@@ -19,20 +17,22 @@
         "type": "git",
         "url": "https://github.com/Lusito/react-router-ts.git"
     },
+    "license": "ZLib",
+    "author": "Santo Pfingsten",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
         "dist/"
     ],
     "scripts": {
         "build": "rimraf dist && tsc"
     },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
     "devDependencies": {
-        "@types/react": "^16.9.19",
+        "@types/react": "^16.9.22",
         "rimraf": "^3.0.2",
-        "typescript": "^3.7.5"
+        "typescript": "^3.8.2"
     },
     "peerDependencies": {
-        "react": "^16.12.0"
+        "react": "^16.8.0"
     }
 }
