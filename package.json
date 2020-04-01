@@ -1,38 +1,52 @@
 {
-    "name": "react-router-ts",
-    "version": "1.5.0",
-    "description": "A lightweight react router using hooks, written in TypeScript",
-    "keywords": [
-        "TypeScript",
-        "react",
-        "router",
-        "hooks",
-        "react-hooks"
-    ],
-    "homepage": "https://github.com/Lusito/react-router-ts",
-    "bugs": {
-        "url": "https://github.com/Lusito/react-router-ts/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Lusito/react-router-ts.git"
-    },
-    "license": "ZLib",
-    "author": "Santo Pfingsten",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "files": [
-        "dist/"
-    ],
-    "scripts": {
-        "build": "rimraf dist && tsc"
-    },
-    "devDependencies": {
-        "@types/react": "^16.9.22",
-        "rimraf": "^3.0.2",
-        "typescript": "^3.8.2"
-    },
-    "peerDependencies": {
-        "react": "^16.8.0"
-    }
+  "name": "react-router-ts",
+  "version": "1.5.0",
+  "description": "A lightweight react router using hooks, written in TypeScript",
+  "keywords": [
+    "TypeScript",
+    "react",
+    "router",
+    "hooks",
+    "react-hooks"
+  ],
+  "homepage": "https://github.com/Lusito/react-router-ts",
+  "bugs": {
+    "url": "https://github.com/Lusito/react-router-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lusito/react-router-ts.git"
+  },
+  "license": "ZLib",
+  "author": "Santo Pfingsten",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "lint": "npm run lint:es && npm run lint:package && npm run lint:style",
+    "lint:es": "eslint src/**/*.{ts,tsx} --ext .ts,.tsx --ignore-path .prettierignore",
+    "lint:es:fix": "npm run lint:es -- --fix",
+    "lint:fix": "npm run lint:es:fix && npm run lint:package:fix && npm run lint:style:fix",
+    "lint:package": "sort-package-json --check",
+    "lint:package:fix": "sort-package-json",
+    "lint:style": "npm run lint:style:base -- --check",
+    "lint:style:base": "prettier src/**/*.{ts,tsx,js,json} ./*.{ts,tsx,js,json}",
+    "lint:style:fix": "npm run lint:style:base -- --write"
+  },
+  "devDependencies": {
+    "@lusito/eslint-config-react": "^1.0.3",
+    "@lusito/prettier-config": "^1.0.0",
+    "@lusito/stylelint-config": "^1.0.0",
+    "@types/react": "^16.9.22",
+    "react": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "sort-package-json": "^1.40.0",
+    "typescript": "^3.8.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  }
 }

@@ -13,8 +13,5 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node"
   },
-  "exclude": [
-      "test",
-      "dist"
-  ]
+  "exclude": ["test", "dist"]
 }

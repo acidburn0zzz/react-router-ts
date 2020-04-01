@@ -1,6 +1,7 @@
 import { useContext, useMemo } from "react";
+
 import { RouterContext } from "./RouterContext";
-import { RouteParams } from "./Route";
+import type { RouteParams } from "./Route";
 
 export const useRouter = () => useContext(RouterContext);
 

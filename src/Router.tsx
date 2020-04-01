@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from "react";
+
 import { RouterContext, RouterContextValue } from "./RouterContext";
 import { createHistory } from "./history";
 import { createRouteMatcher, RouteMatcherFactory } from "./routeMatcher";
@@ -12,12 +13,16 @@ export interface RouterProps {
 
 const setPathReducer = (state: RouterContextValue, path: string) => ({ ...state, path });
 
-export const Router = ({ basename = "", routeMatcherFactory = simpleRouteMatcherFactory, children }: React.PropsWithChildren<RouterProps>) => {
+export const Router = ({
+    basename = "",
+    routeMatcherFactory = simpleRouteMatcherFactory,
+    children,
+}: React.PropsWithChildren<RouterProps>) => {
     const [router, setPath] = useReducer(setPathReducer, null, () => ({
         basename,
         history: createHistory(basename, (path) => setPath(path)),
         path: getPathWithoutBasename(basename),
-        matchRoute: createRouteMatcher(routeMatcherFactory)
+        matchRoute: createRouteMatcher(routeMatcherFactory),
     }));
     useEffect(() => router.history.stop, []);
     return <RouterContext.Provider value={router}>{children}</RouterContext.Provider>;

@@ -12,17 +12,17 @@ export function createHistory(basename: string, onChange: (s: string) => void): 
     return {
         push(path: string) {
             const newPath = `${basename}${path}`;
+            const { location, history } = window;
             // Only push if something changed.
-            if (newPath !== (location.pathname + location.search + location.hash))
-                history.pushState({}, "", newPath);
+            if (newPath !== location.pathname + location.search + location.hash) history.pushState({}, "", newPath);
             onChange(path);
         },
         replace(path: string) {
-            history.replaceState({}, "", `${basename}${path}`);
+            window.history.replaceState({}, "", `${basename}${path}`);
             onChange(path);
         },
         stop() {
             window.removeEventListener("popstate", onPopState);
-        }
+        },
     };
 }

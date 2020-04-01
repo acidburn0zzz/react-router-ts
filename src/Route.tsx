@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+
 import { useRouter } from "./hooks";
 
 export type RouteParams = { [s: string]: string };
@@ -18,16 +19,13 @@ export function Route(props: RouteProps) {
     const router = useRouter();
     const params = useMemo(() => router.matchRoute(props.path, router.path), [props.path, router.path]);
 
-    if (!params)
-        return null;
+    if (!params) return null;
 
     const Component = props.component;
     if (Component) {
-        let key: string | undefined = undefined;
-        if (props.addKey === true)
-            key = router.path;
-        else if (props.addKey)
-            key = props.addKey.map((key) => `${key}=${params[key]}`).join("|");
+        let key: string | undefined;
+        if (props.addKey === true) key = router.path;
+        else if (props.addKey) key = props.addKey.map((k) => `${k}=${params[k]}`).join("|");
         return <Component params={params} key={key} />;
     }
 
